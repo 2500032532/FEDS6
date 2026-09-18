@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodieHUB - Food Sharing</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4faf7;
+    color:#174f43;
+}
+
+button,input,select,textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    height:88px;
+    background:white;
+    border-bottom:1px solid #e2eee8;
+    display:flex;
+    align-items:center;
+    padding:0 24px;
+    gap:30px;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:300px;
+}
+
+.logo-circle{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#15966e,#087454);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:32px;
+}
+
+.logo h1{
+    font-size:28px;
+    color:#087359;
+}
+
+.logo h1 span{
+    color:#f27425;
+}
+
+.logo p{
+    font-size:11px;
+    color:#789088;
+    margin-top:3px;
+}
+
+.slogan{
+    flex:1;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    font-style:italic;
+    color:#08705c;
+}
+
+.slogan span{
+    color:#ff7435;
+    margin:0 10px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.stat{
+    padding:10px 15px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.stat.green{
+    background:#e4f8ed;
+}
+
+.stat.orange{
+    background:#fff0e6;
+}
+
+.stat-icon{
+    font-size:25px;
+}
+
+.stat strong{
+    display:block;
+    font-size:15px;
+    color:#08755b;
+}
+
+.stat small{
+    color:#789087;
+    font-size:9px;
+}
+
+.notification{
+    font-size:25px;
+    position:relative;
+}
+
+.notification::after{
+    content:"";
+    width:8px;
+    height:8px;
+    background:red;
+    border-radius:50%;
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+.user{
+    border-left:1px solid #e0eae5;
+    padding-left:15px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#ffe7d6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.user strong{
+    font-size:13px;
+    display:block;
+}
+
+.user small{
+    font-size:9px;
+    color:#89958f;
+}
+
+/* ================= LAYOUT ================= */
+
+.layout{
+    display:grid;
+    grid-template-columns:245px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    background:white;
+    min-height:calc(100vh - 88px);
+    border-right:1px solid #e1ece7;
+    padding:18px 16px;
+}
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:12px 13px;
+    margin-bottom:5px;
+    border-radius:11px;
+    color:#45655b;
+    font-size:13px;
+    transition:.2s;
+}
+
+.menu:hover{
+    background:#edf9f2;
+    color:#08765d;
+}
+
+.menu.active{
+    background:#dff5e7;
+    color:#056a52;
+    font-weight:bold;
+}
+
+.menu-icon{
+    font-size:20px;
+    width:25px;
+}
+
+.menu-count{
+    margin-left:auto;
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:#edf5f1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:10px;
+}
+
+.menu-count.red{
+    background:#ff4b42;
+    color:white;
+}
+
+.side-message{
+    margin-top:35px;
+    min-height:285px;
+    border-radius:14px;
+    background:linear-gradient(160deg,#eaf9df,#f8fff0);
+    text-align:center;
+    padding:25px 12px;
+    overflow:hidden;
+}
+
+.side-message .plant{
+    font-size:40px;
+}
+
+.side-message h2{
+    color:#087353;
+    font-style:italic;
+    font-size:21px;
+    line-height:1.35;
+    margin:10px 0;
+}
+
+.side-message p{
+    color:#638277;
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    padding:18px;
+    min-width:0;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 390px;
+    gap:18px;
+}
+
+.left{
+    min-width:0;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:280px;
+    border-radius:17px;
+    background:linear-gradient(110deg,#f2fbdc,#fff5c9);
+    border:1px solid #e5edca;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+    padding:28px 23px;
+}
+
+.hero-text{
+    width:55%;
+    z-index:2;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:20px;
+    background:white;
+    color:#08745c;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.hero h2{
+    font-size:39px;
+    line-height:1.08;
+    color:#086051;
+    margin-top:12px;
+}
+
+.hero h2 span{
+    color:#f06d22;
+}
+
+.hero p{
+    margin-top:12px;
+    color:#385f56;
+    font-size:15px;
+    line-height:1.5;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+}
+
+.btn{
+    border:none;
+    border-radius:25px;
+    padding:13px 22px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.btn-green{
+    background:#087d61;
+    color:white;
+}
+
+.btn-white{
+    background:white;
+    border:2px solid #087d61;
+    color:#08705a;
+}
+
+.hero-food{
+    position:absolute;
+    right:25px;
+    bottom:-25px;
+    width:400px;
+    height:270px;
+    object-fit:cover;
+    border-radius:50%;
+    filter:drop-shadow(0 15px 15px rgba(0,0,0,.2));
+}
+
+.hero-decoration{
+    position:absolute;
+    right:25px;
+    top:25px;
+    font-size:18px;
+    font-weight:bold;
+    font-style:italic;
+    color:#087353;
+}
+
+/* ================= QUICK CARDS ================= */
+
+.quick{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+    margin-top:16px;
+}
+
+.quick-card{
+    padding:17px;
+    min-height:190px;
+    border-radius:14px;
+    transition:.25s;
+}
+
+.quick-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.quick-card.green{
+    background:#ecfaed;
+}
+
+.quick-card.red{
+    background:#fff0e9;
+}
+
+.quick-card.purple{
+    background:#f2efff;
+}
+
+.quick-card.blue{
+    background:#eaf6ff;
+}
+
+.quick-icon{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:rgba(255,255,255,.65);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
+
+.quick-card h3{
+    margin-top:10px;
+    font-size:15px;
+}
+
+.quick-card p{
+    font-size:11px;
+    color:#647b72;
+    line-height:1.5;
+    margin-top:6px;
+    min-height:34px;
+}
+
+.quick-card button{
+    width:100%;
+    border:none;
+    color:white;
+    border-radius:20px;
+    padding:10px;
+    margin-top:10px;
+    font-weight:bold;
+    font-size:10px;
+}
+
+.green button{
+    background:#078b67;
+}
+
+.red button{
+    background:#fa603d;
+}
+
+.purple button{
+    background:#6648d1;
+}
+
+.blue button{
+    background:#217ed1;
+}
+
+/* ================= FOOD ================= */
+
+.food-section{
+    background:white;
+    border:1px solid #dfebe5;
+    border-radius:15px;
+    margin-top:16px;
+    padding:17px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:13px;
+}
+
+.section-title h2{
+    font-size:18px;
+    color:#086652;
+}
+
+.section-title button{
+    border:none;
+    background:none;
+    color:#08765d;
+    font-weight:bold;
+}
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.food-card{
+    border:1px solid #dce9e3;
+    border-radius:12px;
+    overflow:hidden;
+    background:white;
+    transition:.25s;
+}
+
+.food-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 20px rgba(0,0,0,.09);
+}
+
+.food-image{
+    height:125px;
+    position:relative;
+}
+
+.food-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.tag{
+    position:absolute;
+    top:8px;
+    left:8px;
+    padding:5px 8px;
+    border-radius:15px;
+    background:#07875f;
+    color:white;
+    font-size:8px;
+    font-weight:bold;
+}
+
+.food-info{
+    padding:10px;
+}
+
+.food-info h3{
+    font-size:12px;
+    color:#185548;
+}
+
+.food-info p{
+    font-size:9px;
+    color:#82918b;
+    margin-top:4px;
+}
+
+.rating{
+    margin-top:7px;
+    color:#f49b00;
+    font-size:9px;
+}
+
+.details{
+    display:flex;
+    justify-content:space-between;
+    font-size:8px;
+    color:#6d8178;
+    margin-top:7px;
+}
+
+.request-btn{
+    width:100%;
+    border:none;
+    border-radius:6px;
+    padding:9px;
+    background:#07866a;
+    color:white;
+    font-size:9px;
+    font-weight:bold;
+    margin-top:9px;
+}
+
+/* ================= IMPACT ================= */
+
+.impact{
+    margin-top:16px;
+    border-radius:15px;
+    padding:20px;
+    background:linear-gradient(120deg,#e7f9eb,#f9fff1);
+}
+
+.impact h2{
+    font-size:17px;
+    color:#08725a;
+}
+
+.impact-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+
+.impact-box{
+    background:white;
+    border-radius:10px;
+    text-align:center;
+    padding:13px;
+}
+
+.impact-box strong{
+    display:block;
+    font-size:21px;
+    color:#078263;
+}
+
+.impact-box small{
+    font-size:9px;
+    color:#83918b;
+}
+
+/* ================= RIGHT PANEL ================= */
+
+.right{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+/* REQUEST */
+
+.request{
+    background:white;
+    border:1px solid #dceae4;
+    border-radius:15px;
+    padding:18px;
+}
+
+.request-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.request-icon{
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    background:#e1f7e9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:23px;
+}
+
+.request h2{
+    font-size:17px;
+    color:#08705b;
+}
+
+.request-head p{
+    color:#87948e;
+    font-size:9px;
+    margin-top:3px;
+}
+
+.form-group{
+    margin-top:10px;
+}
+
+.form-group label{
+    display:block;
+    font-size:10px;
+    font-weight:bold;
+    color:#4e675e;
+    margin-bottom:5px;
+}
+
+.required{
+    color:red;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    border:1px solid #d8e5df;
+    border-radius:7px;
+    padding:10px;
+    outline:none;
+    font-size:10px;
+}
+
+.form-group textarea{
+    height:65px;
+    resize:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#0a9875;
+}
+
+.submit{
+    width:100%;
+    margin-top:13px;
+    border:none;
+    border-radius:7px;
+    padding:12px;
+    background:#078568;
+    color:white;
+    font-weight:bold;
+    font-size:11px;
+}
+
+/* ================= ACTIVITY ================= */
+
+.activity{
+    background:white;
+    border:1px solid #dceae4;
+    border-radius:15px;
+    padding:17px;
+}
+
+.activity-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+}
+
+.activity-title h2{
+    font-size:16px;
+    color:#08705b;
+}
+
+.activity-title button{
+    border:none;
+    background:none;
+    color:#08745c;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.person{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:11px 0;
+    border-bottom:1px solid #edf2ef;
+}
+
+.person:last-child{
+    border-bottom:none;
+}
+
+.person-avatar{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#f6eadf;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:18px;
+}
+
+.person-text{
+    flex:1;
+}
+
+.person-text strong{
+    font-size:10px;
+}
+
+.person-text p{
+    font-size:9px;
+    color:#6f8179;
+    margin-top:3px;
+}
+
+.person-text small{
+    font-size:8px;
+    color:#9ba7a2;
+}
+
+.status{
+    padding:6px 9px;
+    border-radius:15px;
+    font-size:7px;
+    font-weight:bold;
+}
+
+.status.request{
+    background:#e1f8ec;
+    color:#087653;
+}
+
+.status.donate{
+    background:#e1f2ff;
+    color:#1470af;
+}
+
+/* ================= COMMUNITY ================= */
+
+.community{
+    background:linear-gradient(130deg,#e8f8ee,#f9fff1);
+    border:1px solid #dcece0;
+    border-radius:15px;
+    padding:17px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.community-icon{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+}
+
+.community h3{
+    font-size:13px;
+    color:#08705a;
+}
+
+.community p{
+    font-size:9px;
+    color:#71857b;
+    margin-top:4px;
+}
+
+.community button{
+    border:none;
+    background:#078366;
+    color:white;
+    border-radius:15px;
+    padding:7px 12px;
+    font-size:8px;
+    margin-top:7px;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    margin-top:16px;
+    background:#eaf8ee;
+    border-radius:13px;
+    padding:13px;
+    display:flex;
+    justify-content:center;
+    gap:45px;
+    color:#08705b;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* ================= POPUP ================= */
+
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+}
+
+.popup.show{
+    display:flex;
+}
+
+.popup-box{
+    background:white;
+    width:380px;
+    border-radius:18px;
+    padding:25px;
+    position:relative;
+}
+
+.popup-box h2{
+    color:#08725a;
+}
+
+.popup-box p{
+    font-size:11px;
+    color:#778b83;
+    margin:7px 0 15px;
+}
+
+.popup-box input{
+    width:100%;
+    padding:11px;
+    margin-bottom:10px;
+    border:1px solid #dce7e2;
+    border-radius:7px;
+}
+
+.popup-box button{
+    width:100%;
+    padding:11px;
+    background:#078366;
+    border:none;
+    border-radius:7px;
+    color:white;
+    font-weight:bold;
+}
+
+.close{
+    position:absolute;
+    right:13px;
+    top:10px;
+    width:28px!important;
+    height:28px;
+    border-radius:50%!important;
+    background:#edf3f0!important;
+    color:#456!important;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1250px){
+
+    .header{
+        gap:15px;
+    }
+
+    .logo{
+        min-width:230px;
+    }
+
+    .slogan{
+        font-size:16px;
+    }
+
+    .dashboard{
+        grid-template-columns:minmax(0,1fr) 330px;
+    }
+
+    .hero h2{
+        font-size:32px;
+    }
+
+    .hero-food{
+        width:330px;
+        height:240px;
+    }
+}
+
+@media(max-width:1000px){
+
+    .slogan{
+        display:none;
+    }
+
+    .header-right .stat{
+        display:none;
+    }
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .right{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .request{
+        grid-row:span 2;
+    }
+}
+
+@media(max-width:750px){
+
+    .sidebar{
+        display:none;
+    }
+
+    .layout{
+        display:block;
+    }
+
+    .header{
+        height:70px;
+        padding:0 12px;
+    }
+
+    .logo-circle{
+        width:45px;
+        height:45px;
+        font-size:22px;
+    }
+
+    .logo h1{
+        font-size:21px;
+    }
+
+    .logo p{
+        display:none;
+    }
+
+    .user small{
+        display:none;
+    }
+
+    .main{
+        padding:10px;
+    }
+
+    .hero{
+        min-height:400px;
+    }
+
+    .hero-text{
+        width:100%;
+    }
+
+    .hero-food{
+        width:260px;
+        height:170px;
+        right:10px;
+        bottom:-10px;
+    }
+
+    .quick{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .food-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .right{
+        display:flex;
+    }
+
+    .impact-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            🌿
+        </div>
+
+        <div>
+            <h1>Foodie<span>HUB</span></h1>
+            <p>Share Food • Reduce Waste • Fight Hunger</p>
+        </div>
+
+    </div>
+
+
+    <div class="slogan">
+        Good Food
+        <span>♥</span>
+        Good People
+        <span>♥</span>
+        Better Tomorrow
+    </div>
+
+
+    <div class="header-right">
+
+        <div class="stat green">
+            <div class="stat-icon">🍲</div>
+            <div>
+                <strong>1,280+</strong>
+                <small>Meals Shared</small>
+            </div>
+        </div>
+
+        <div class="stat orange">
+            <div class="stat-icon">👥</div>
+            <div>
+                <strong>420+</strong>
+                <small>Active Donors</small>
+            </div>
+        </div>
+
+        <div class="notification">
+            🔔
+        </div>
+
+        <div class="user">
+
+            <div class="avatar">
+                👩
+            </div>
+
+            <div>
+                <strong>Hi, Priya</strong>
+                <small>Make an impact</small>
+            </div>
+
+            <span>⌄</span>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<div class="layout">
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="menu active">
+        <span class="menu-icon">🏠</span>
+        <span>Dashboard</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">🍲</span>
+        <span>Share Meals</span>
+        <span class="menu-count">2</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">💝</span>
+        <span>Food Requests</span>
+        <span class="menu-count">3</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">📍</span>
+        <span>Nearby Food</span>
+        <span class="menu-count">4</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">📦</span>
+        <span>My Donations</span>
+        <span class="menu-count">5</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">📋</span>
+        <span>My Requests</span>
+        <span class="menu-count">6</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">👥</span>
+        <span>Community</span>
+        <span class="menu-count">7</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">🌱</span>
+        <span>My Impact</span>
+        <span class="menu-count">8</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">🔔</span>
+        <span>Notifications</span>
+        <span class="menu-count red">3</span>
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">⚙️</span>
+        <span>Settings</span>
+        <span class="menu-count">10</span>
+    </div>
+
+
+    <div class="side-message">
+
+        <div class="plant">🌿</div>
+
+        <h2>
+            Small Actions<br>
+            Make a<br>
+            Big Impact ❤️
+        </h2>
+
+        <p>
+            Every meal shared<br>
+            creates an impact.
+        </p>
+
+        <div style="font-size:50px;margin-top:15px;">
+            🍲
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+<div class="dashboard">
+
+
+<div class="left">
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <span class="badge">
+            🌿 Welcome to FoodieHUB
+        </span>
+
+        <h2>
+            Good Food Deserves a
+            <br>
+            <span>Second Chance</span>
+        </h2>
+
+        <p>
+            Turn surplus food into someone's next meal.
+            <br>
+            Together we can reduce food waste and fight hunger.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button
+                class="btn btn-green"
+                onclick="openDonate()"
+            >
+                🍲 Donate Food →
+            </button>
+
+            <button
+                class="btn btn-white"
+                onclick="findFood()"
+            >
+                🔍 Find Food →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-decoration">
+        Share Food<br>
+        Spread Hope ❤️
+    </div>
+
+
+    <img
+        class="hero-food"
+        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+        alt="Delicious food"
+    >
+
+</section>
+
+
+
+<!-- ================= QUICK CARDS ================= -->
+
+<section class="quick">
+
+    <div class="quick-card green">
+
+        <div class="quick-icon">
+            🍲
+        </div>
+
+        <h3>Share Meals</h3>
+
+        <p>
+            Donate extra food and reduce waste.
+        </p>
+
+        <button onclick="openDonate()">
+            Donate Now →
+        </button>
+
+    </div>
+
+
+    <div class="quick-card red">
+
+        <div class="quick-icon">
+            ❤️
+        </div>
+
+        <h3>Food Requests</h3>
+
+        <p>
+            Need food? Get help from local donors.
+        </p>
+
+        <button onclick="requestFood()">
+            Request Now →
+        </button>
+
+    </div>
+
+
+    <div class="quick-card purple">
+
+        <div class="quick-icon">
+            📍
+        </div>
+
+        <h3>Nearby Food</h3>
+
+        <p>
+            Find fresh meals near your location.
+        </p>
+
+        <button onclick="findFood()">
+            View Nearby →
+        </button>
+
+    </div>
+
+
+    <div class="quick-card blue">
+
+        <div class="quick-icon">
+            📦
+        </div>
+
+        <h3>My Donations</h3>
+
+        <p>
+            Track your shared meals and impact.
+        </p>
+
+        <button onclick="showImpact()">
+            View Details →
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOD LISTINGS ================= -->
+
+<section class="food-section" id="food">
+
+    <div class="section-title">
+
+        <div>
+            <h2>🍴 Featured Food Listings</h2>
+        </div>
+
+        <button onclick="showAllFood()">
+            View All →
+        </button>
+
+    </div>
+
+
+    <div class="food-grid">
+
+
+        <!-- BIRYANI -->
+
+        <div class="food-card">
+
+            <div class="food-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=600&q=80"
+                >
+
+                <span class="tag">
+                    Available
+                </span>
+
+            </div>
+
+            <div class="food-info">
+
+                <h3>
+                    Vegetable Biryani 🌱
+                </h3>
+
+                <p>
+                    Freshly prepared delicious biryani
+                </p>
+
+                <div class="rating">
+                    ⭐ 4.8 (32 reviews)
+                </div>
+
+                <div class="details">
+                    <span>🍽 35 meals</span>
+                    <span>📍 Vijayawada</span>
+                </div>
+
+                <button
+                    class="request-btn"
+                    onclick="requestItem('Vegetable Biryani')"
+                >
+                    🍴 Request Food
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PIZZA -->
+
+        <div class="food-card">
+
+            <div class="food-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80"
+                >
+
+                <span class="tag">
+                    Available
+                </span>
+
+            </div>
+
+            <div class="food-info">
+
+                <h3>
+                    Cheese Pizza 🍕
+                </h3>
+
+                <p>
+                    Fresh pizza slices from restaurant
+                </p>
+
+                <div class="rating">
+                    ⭐ 4.7 (28 reviews)
+                </div>
+
+                <div class="details">
+                    <span>🍽 20 meals</span>
+                    <span>📍 Guntur</span>
+                </div>
+
+                <button
+                    class="request-btn"
+                    onclick="requestItem('Cheese Pizza')"
+                >
+                    🍴 Request Food
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- IDLI -->
+
+        <div class="food-card">
+
+            <div class="food-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80"
+                >
+
+                <span class="tag">
+                    Available
+                </span>
+
+            </div>
+
+            <div class="food-info">
+
+                <h3>
+                    Idli & Sambar 🍲
+                </h3>
+
+                <p>
+                    Healthy traditional breakfast
+                </p>
+
+                <div class="rating">
+                    ⭐ 4.9 (45 reviews)
+                </div>
+
+                <div class="details">
+                    <span>🍽 25 meals</span>
+                    <span>📍 Mangalagiri</span>
+                </div>
+
+                <button
+                    class="request-btn"
+                    onclick="requestItem('Idli & Sambar')"
+                >
+                    🍴 Request Food
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FRUITS -->
+
+        <div class="food-card">
+
+            <div class="food-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=600&q=80"
+                >
+
+                <span class="tag">
+                    Fresh
+                </span>
+
+            </div>
+
+            <div class="food-info">
+
+                <h3>
+                    Fresh Fruits 🍎
+                </h3>
+
+                <p>
+                    Healthy seasonal fruit packs
+                </p>
+
+                <div class="rating">
+                    ⭐ 4.6 (18 reviews)
+                </div>
+
+                <div class="details">
+                    <span>🍽 15 packs</span>
+                    <span>📍 Vijayawada</span>
+                </div>
+
+                <button
+                    class="request-btn"
+                    onclick="requestItem('Fresh Fruits')"
+                >
+                    🍴 Request Food
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= IMPACT ================= -->
+
+<section class="impact">
+
+    <h2>
+        🌱 Together We Can Make a Difference
+    </h2>
+
+    <div class="impact-grid">
+
+        <div class="impact-box">
+            <strong>1,280+</strong>
+            <small>Meals Shared</small>
+        </div>
+
+        <div class="impact-box">
+            <strong>420+</strong>
+            <small>Active Donors</small>
+        </div>
+
+        <div class="impact-box">
+            <strong>350+</strong>
+            <small>Families Helped</small>
+        </div>
+
+        <div class="impact-box">
+            <strong>180kg</strong>
+            <small>Food Saved</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+</div>
+
+
+
+<!-- ================= RIGHT SIDE ================= -->
+
+<div class="right">
+
+
+<!-- REQUEST FORM -->
+
+<section class="request" id="request">
+
+    <div class="request-head">
+
+        <div class="request-icon">
+            🌿
+        </div>
+
+        <div>
+
+            <h2>Request Food</h2>
+
+            <p>
+                Fill in your details to request food assistance.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <form id="requestForm">
+
+        <div class="form-group">
+
+            <label>
+                🍲 Food Category <span class="required">*</span>
+            </label>
+
+            <select required>
+
+                <option value="">
+                    Select category
+                </option>
+
+                <option>Rice / Meals</option>
+                <option>Biryani</option>
+                <option>Pizza</option>
+                <option>Idli & Sambar</option>
+                <option>Fruits</option>
+                <option>Snacks</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                🍽 Quantity (Meals) <span class="required">*</span>
+            </label>
+
+            <input
+                type="number"
+                placeholder="e.g. 5, 10, 20"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                📍 Location <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                placeholder="Enter your area or city"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                📞 Phone Number <span class="required">*</span>
+            </label>
+
+            <input
+                type="tel"
+                placeholder="+91 98765 43210"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                📝 Additional Information
+            </label>
+
+            <textarea
+                placeholder="Any special request or note..."
+            ></textarea>
+
+        </div>
+
+
+        <button class="submit" type="submit">
+            ✈️ Submit Request
+        </button>
+
+    </form>
+
+</section>
+
+
+
+<!-- RECENT ACTIVITY -->
+
+<section class="activity">
+
+    <div class="activity-title">
+
+        <h2>
+            🔔 Recent Activity
+        </h2>
+
+        <button>
+            View All →
+        </button>
+
+    </div>
+
+
+    <div class="person">
+
+        <div class="person-avatar">
+            👩
+        </div>
+
+        <div class="person-text">
+
+            <strong>Rahul</strong>
+
+            <p>
+                requested Vegetable Biryani
+            </p>
+
+            <small>
+                2 mins ago
+            </small>
+
+        </div>
+
+        <span class="status request">
+            Request
+        </span>
+
+    </div>
+
+
+    <div class="person">
+
+        <div class="person-avatar">
+            👩
+        </div>
+
+        <div class="person-text">
+
+            <strong>Sneha</strong>
+
+            <p>
+                donated Fresh Fruits
+            </p>
+
+            <small>
+                15 mins ago
+            </small>
+
+        </div>
+
+        <span class="status donate">
+            Donated
+        </span>
+
+    </div>
+
+
+    <div class="person">
+
+        <div class="person-avatar">
+            👨
+        </div>
+
+        <div class="person-text">
+
+            <strong>Arjun</strong>
+
+            <p>
+                requested Idli & Sambar
+            </p>
+
+            <small>
+                32 mins ago
+            </small>
+
+        </div>
+
+        <span class="status request">
+            Request
+        </span>
+
+    </div>
+
+
+    <div class="person">
+
+        <div class="person-avatar">
+            👩
+        </div>
+
+        <div class="person-text">
+
+            <strong>Priya</strong>
+
+            <p>
+                donated Meal Box
+            </p>
+
+            <small>
+                1 hour ago
+            </small>
+
+        </div>
+
+        <span class="status donate">
+            Donated
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- COMMUNITY -->
+
+<section class="community">
+
+    <div class="community-icon">
+        👥
+    </div>
+
+    <div>
+
+        <h3>
+            FoodieHUB Community
+        </h3>
+
+        <p>
+            1,260+ people are helping reduce food waste.
+        </p>
+
+        <button onclick="joinCommunity()">
+            Join Community →
+        </button>
+
+    </div>
+
+</section>
+
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+    <span>🌿 Reduce Food Waste</span>
+
+    <span>❤️ Help Communities</span>
+
+    <span>🌎 Build a Better Future</span>
+
+</div>
+
+
+</main>
+
+</div>
+
+
+
+<!-- ================= DONATE POPUP ================= -->
+
+<div class="popup" id="donatePopup">
+
+    <div class="popup-box">
+
+        <button
+            class="close"
+            onclick="closeDonate()"
+        >
+            ×
+        </button>
+
+        <h2>
+            🍲 Share Your Food
+        </h2>
+
+        <p>
+            Enter your food details and help someone
+            enjoy a good meal.
+        </p>
+
+        <input
+            id="foodName"
+            type="text"
+            placeholder="Food name"
+        >
+
+        <input
+            id="foodQuantity"
+            type="number"
+            placeholder="Number of meals"
+        >
+
+        <input
+            id="foodLocation"
+            type="text"
+            placeholder="Pickup location"
+        >
+
+        <button onclick="publishDonation()">
+            ❤️ Publish Donation
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* ================= DONATE ================= */
+
+function openDonate(){
+
+    document
+        .getElementById("donatePopup")
+        .classList.add("show");
+
+}
+
+function closeDonate(){
+
+    document
+        .getElementById("donatePopup")
+        .classList.remove("show");
+
+}
+
+function publishDonation(){
+
+    let food =
+        document.getElementById("foodName").value;
+
+    let quantity =
+        document.getElementById("foodQuantity").value;
+
+    let location =
+        document.getElementById("foodLocation").value;
+
+    if(food === "" || quantity === "" || location === ""){
+
+        alert("Please fill all donation details.");
+
+        return;
+    }
+
+    alert(
+        "🎉 Donation Published Successfully!\n\n" +
+        food + " - " + quantity +
+        " meals\n" +
+        "📍 " + location +
+        "\n\nThank you for helping reduce food waste ❤️"
+    );
+
+    closeDonate();
+
+}
+
+
+/* ================= REQUEST FOOD ================= */
+
+function requestFood(){
+
+    document
+        .getElementById("request")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+function requestItem(food){
+
+    document
+        .getElementById("request")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    setTimeout(function(){
+
+        alert(
+            "🍲 " + food +
+            " selected!\n\n" +
+            "Please complete the Request Food form."
+        );
+
+    },500);
+
+}
+
+
+/* ================= FIND FOOD ================= */
+
+function findFood(){
+
+    document
+        .getElementById("food")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* ================= IMPACT ================= */
+
+function showImpact(){
+
+    alert(
+        "🌱 Your FoodieHUB Impact\n\n" +
+        "Meals Shared: 128\n" +
+        "Families Helped: 18\n" +
+        "Food Saved: 42 kg\n" +
+        "Completed Donations: 9"
+    );
+
+}
+
+
+/* ================= ALL FOOD ================= */
+
+function showAllFood(){
+
+    alert(
+        "🍴 FoodieHUB\n\n" +
+        "More food listings will be available soon!"
+    );
+
+}
+
+
+/* ================= COMMUNITY ================= */
+
+function joinCommunity(){
+
+    alert(
+        "🤝 Welcome to the FoodieHUB Community!\n\n" +
+        "You are now part of a community working " +
+        "together to reduce food waste. ❤️"
+    );
+
+}
+
+
+/* ================= REQUEST FORM ================= */
+
+document
+    .getElementById("requestForm")
+    .addEventListener("submit",function(e){
+
+        e.preventDefault();
+
+        alert(
+            "✅ Food Request Submitted!\n\n" +
+            "Your request has been successfully received.\n\n" +
+            "FoodieHUB will notify you when a donor accepts your request. ❤️"
+        );
+
+        this.reset();
+
+    });
+
+
+/* ================= CLOSE POPUP ================= */
+
+window.addEventListener("click",function(e){
+
+    let popup =
+        document.getElementById("donatePopup");
+
+    if(e.target === popup){
+
+        closeDonate();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
