@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Online Voting System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#eef4ff,#dbeafe);
+    min-height:100vh;
+    color:#082b68;
+}
+
+/* HEADER */
+
+header{
+    height:75px;
+    background:#172b60;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+nav button{
+    background:none;
+    border:none;
+    color:white;
+    font-size:16px;
+    margin-left:25px;
+    cursor:pointer;
+}
+
+nav button:hover{
+    color:#60a5fa;
+}
+
+/* PAGE */
+
+.page{
+    display:none;
+    min-height:calc(100vh - 75px);
+}
+
+.active{
+    display:block;
+}
+
+/* HOME */
+
+.home{
+    text-align:center;
+    padding:80px 20px;
+}
+
+.home h1{
+    font-size:52px;
+    margin-bottom:20px;
+}
+
+.home p{
+    font-size:20px;
+    color:#475569;
+    margin-bottom:30px;
+}
+
+.main-btn{
+    border:none;
+    background:#2864e8;
+    color:white;
+    padding:15px 30px;
+    border-radius:8px;
+    font-size:17px;
+    cursor:pointer;
+    margin:8px;
+}
+
+.main-btn:hover{
+    background:#174dcc;
+}
+
+/* FEATURES */
+
+.features{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin-top:50px;
+}
+
+.feature{
+    background:white;
+    width:260px;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 25px #0002;
+}
+
+.feature h2{
+    margin-bottom:12px;
+}
+
+/* FORM */
+
+.form-box{
+    background:white;
+    width:420px;
+    max-width:90%;
+    margin:70px auto;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px #0002;
+    text-align:center;
+}
+
+.form-box h1{
+    margin-bottom:10px;
+}
+
+.form-box p{
+    color:#64748b;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin:9px 0;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:15px;
+}
+
+/* TITLE */
+
+.title{
+    text-align:center;
+    padding:45px 20px 20px;
+}
+
+.title h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+/* CANDIDATES */
+
+.candidates{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    padding:30px;
+}
+
+.card{
+    background:white;
+    width:280px;
+    padding:30px;
+    text-align:center;
+    border-radius:18px;
+    box-shadow:0 8px 25px #0002;
+}
+
+.person{
+    font-size:55px;
+}
+
+.card h2{
+    margin:15px 0;
+}
+
+.card p{
+    margin:10px;
+    color:#64748b;
+}
+
+/* VOTE PAGE */
+
+.vote-box{
+    background:white;
+    width:690px;
+    max-width:90%;
+    margin:85px auto;
+    padding:55px;
+    border-radius:20px;
+    box-shadow:0 10px 30px #0002;
+}
+
+.vote-box h1{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.vote-box > p{
+    text-align:center;
+    font-size:18px;
+    margin-bottom:30px;
+}
+
+/* OPTIONS */
+
+.option{
+    display:flex;
+    align-items:center;
+    padding:25px;
+    margin:15px 0;
+    border:2px solid #dbe2ec;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:20px;
+    transition:0.3s;
+}
+
+.option:hover{
+    border-color:#2864e8;
+    background:#f1f6ff;
+}
+
+.option input{
+    width:auto;
+    margin-right:20px;
+    transform:scale(1.3);
+}
+
+/* SUCCESS */
+
+.success-box{
+    background:white;
+    width:650px;
+    max-width:90%;
+    margin:90px auto;
+    padding:60px 40px;
+    border-radius:22px;
+    box-shadow:0 10px 30px #0002;
+    text-align:center;
+}
+
+.success-icon{
+    width:90px;
+    height:90px;
+    background:#22c55e;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 25px;
+    font-size:55px;
+}
+
+.success-box h1{
+    color:#166534;
+    margin-bottom:15px;
+}
+
+.success-box p{
+    font-size:18px;
+    color:#475569;
+}
+
+/* RESULTS */
+
+.results{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    padding:30px;
+}
+
+.result-card{
+    background:white;
+    width:290px;
+    padding:35px;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:0 8px 25px #0002;
+}
+
+.result-card h2{
+    margin-bottom:15px;
+}
+
+.vote-number{
+    font-size:55px;
+    font-weight:bold;
+    color:#2864e8;
+    margin:15px;
+}
+
+.total-box{
+    text-align:center;
+    margin:25px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+
+/* LANGUAGE SELECTOR */
+.language-box{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-left:25px;
+}
+.language-box select{
+    padding:8px 10px;
+    border-radius:7px;
+    border:1px solid #cbd5e1;
+    background:white;
+    color:#172b60;
+    cursor:pointer;
+}
+
+/* ADMIN */
+.admin-box{
+    background:white;
+    width:95%;
+    max-width:1200px;
+    margin:45px auto;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 10px 30px #0002;
+    overflow-x:auto;
+}
+.admin-box h1{ margin-bottom:10px; }
+.admin-box > p{ color:#64748b; margin-bottom:20px; }
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+.admin-table th,.admin-table td{
+    padding:14px 12px;
+    border-bottom:1px solid #e2e8f0;
+    text-align:left;
+}
+.admin-table th{
+    background:#172b60;
+    color:white;
+}
+.admin-table tr:hover td{ background:#f8fafc; }
+.empty-admin{
+    text-align:center;
+    padding:35px;
+    color:#64748b;
+}
+.admin-actions{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+.small-btn{
+    border:none;
+    background:#2864e8;
+    color:white;
+    padding:9px 14px;
+    border-radius:7px;
+    cursor:pointer;
+}
+.danger-btn{ background:#dc2626; }
+.admin-login{
+    max-width:430px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    header{
+        height:auto;
+        padding:20px;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav button{
+        margin:5px;
+    }
+
+    .home h1{
+        font-size:38px;
+    }
+
+    .vote-box h1{
+        font-size:30px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo" data-i18n="logo">🗳️ VoteSecure</div>
+
+    <nav>
+        <button onclick="showPage('home')" data-i18n="navHome">Home</button>
+        <button onclick="showPage('register')" data-i18n="navRegister">Register</button>
+        <button onclick="showPage('login')" data-i18n="navLogin">Login</button>
+        <button onclick="showPage('results')" data-i18n="navResults">Results</button>
+        <button onclick="showPage('adminLogin')" data-i18n="navAdmin">Admin</button>
+    </nav>
+
+    <div class="language-box">
+        <span>🌐</span>
+        <select id="languageSelect" onchange="changeLanguage(this.value)" aria-label="Language">
+            <option value="en">English</option>
+            <option value="te">తెలుగు</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+    </div>
+
+</header>
+
+
+
+<!-- HOME PAGE -->
+
+<section id="home" class="page active">
+
+    <div class="home">
+
+        <h1 data-i18n="homeTitle">🗳️ Online Voting System</h1>
+
+        <p data-i18n="homeDesc">A simple, fast and easy digital voting system.</p>
+
+        <button class="main-btn"
+                onclick="showPage('register')">
+            <span data-i18n="registerNow">Register Now</span>
+        </button>
+
+        <button class="main-btn"
+                onclick="showPage('login')">
+            <span data-i18n="navLogin">Login</span>
+        </button>
+
+
+        <div class="features">
+
+            <div class="feature">
+
+                <h2 data-i18n="secureTitle">🔐 Secure</h2>
+
+                <p>
+                    <span data-i18n="secureDesc">Voter login is required before voting.</span>
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <h2 data-i18n="fastTitle">⚡ Fast</h2>
+
+                <p>
+                    <span data-i18n="fastDesc">Votes are recorded instantly.</span>
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <h2 data-i18n="resultsFeatureTitle">📊 Results</h2>
+
+                <p>
+                    <span data-i18n="resultsFeatureDesc">View the number of votes received by each candidate.</span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- REGISTER -->
+
+<section id="register" class="page">
+
+    <div class="form-box">
+
+        <h1 data-i18n="registerTitle">Voter Registration</h1>
+
+        <p data-i18n="registerDesc">Create your voter account</p>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter Full Name" data-placeholder-i18n="fullName"
+        >
+
+        <input
+            type="text"
+            id="voterId"
+            placeholder="Enter Voter ID" data-placeholder-i18n="voterId"
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter Email" data-placeholder-i18n="email"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Create Password" data-placeholder-i18n="createPassword"
+        >
+
+        <button
+            class="main-btn"
+            onclick="register()"
+        >
+            <span data-i18n="registerBtn">Register</span>
+        </button>
+
+        <p>
+            <span data-i18n="alreadyRegistered">Already registered?</span>
+
+            <button
+                onclick="showPage('login')"
+                style="border:none;background:none;color:#2864e8;cursor:pointer;"
+            >
+                Login
+            </button>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- LOGIN -->
+
+<section id="login" class="page">
+
+    <div class="form-box">
+
+        <h1 data-i18n="loginTitle">Voter Login</h1>
+
+        <p>
+            <span data-i18n="loginDesc">Login to continue voting</span>
+        </p>
+
+        <input
+            type="text"
+            id="loginId"
+            placeholder="Enter Voter ID" data-placeholder-i18n="voterId"
+        >
+
+        <input
+            type="password"
+            id="loginPass"
+            placeholder="Enter Password" data-placeholder-i18n="password"
+        >
+
+        <button
+            class="main-btn"
+            onclick="login()"
+        >
+            <span data-i18n="navLogin">Login</span>
+        </button>
+
+        <p>
+            <span data-i18n="newVoter">New voter?</span>
+
+            <button
+                onclick="showPage('register')"
+                style="border:none;background:none;color:#2864e8;cursor:pointer;"
+            >
+                Register
+            </button>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- CANDIDATES -->
+
+<section id="candidates" class="page">
+
+    <div class="title">
+
+        <h1 data-i18n="candidateTitle">Election Candidates</h1>
+
+        <p>
+            <span data-i18n="candidateDesc">View candidates and continue to vote.</span>
+        </p>
+
+    </div>
+
+
+    <div class="candidates">
+
+
+        <div class="card">
+
+            <div class="person">
+                👨‍💼
+            </div>
+
+            <h2>
+                Chandra Babu Naidu
+            </h2>
+
+            <p>
+                Candidate No: 1
+            </p>
+
+            <p>
+                Symbol: 🌳 Tree
+            </p>
+
+            <button
+                class="main-btn"
+                onclick="showPage('vote')"
+            >
+                <span data-i18n="voteBtn">Vote</span>
+            </button>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="person">
+                👨‍💼
+            </div>
+
+            <h2>
+                Thalapathi Vijay
+            </h2>
+
+            <p>
+                Candidate No: 2
+            </p>
+
+            <p>
+                Symbol: ⭐ Star
+            </p>
+
+            <button
+                class="main-btn"
+                onclick="showPage('vote')"
+            >
+                <span data-i18n="voteBtn">Vote</span>
+            </button>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="person">
+                👨‍💼
+            </div>
+
+            <h2>
+                Pawan Kalyan
+            </h2>
+
+            <p>
+                Candidate No: 3
+            </p>
+
+            <p>
+                Symbol: 📚 Book
+            </p>
+
+            <button
+                class="main-btn"
+                onclick="showPage('vote')"
+            >
+                <span data-i18n="voteBtn">Vote</span>
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- CAST VOTE -->
+
+<section id="vote" class="page">
+
+    <div class="vote-box">
+
+        <h1 data-i18n="castVote">🗳️ Cast Your Vote</h1>
+
+        <p>
+            <span data-i18n="selectCandidate">Select one candidate</span>
+        </p>
+
+
+        <label class="option">
+
+            <input
+                type="radio"
+                name="candidate"
+                value="Chandra Babu Naidu"
+            >
+
+            👨‍💼 Chandra Babu Naidu
+            — 🌳 Tree
+
+        </label>
+
+
+
+        <label class="option">
+
+            <input
+                type="radio"
+                name="candidate"
+                value="Thalapathi Vijay"
+            >
+
+            👨‍💼 Thalapathi Vijay
+            — ⭐ Star
+
+        </label>
+
+
+
+        <label class="option">
+
+            <input
+                type="radio"
+                name="candidate"
+                value="Pawan Kalyan"
+            >
+
+            👨‍💼 Pawan Kalyan
+            — 📚 Book
+
+        </label>
+
+
+        <button
+            class="main-btn"
+            style="width:100%;margin:20px 0 0 0;"
+            onclick="submitVote()"
+        >
+            <span data-i18n="submitVote">Submit Vote</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- SUCCESS PAGE -->
+
+<section id="success" class="page">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h1 data-i18n="voteSuccess">Vote Submitted Successfully!</h1>
+
+        <p id="selectedCandidate">
+            <span data-i18n="voteRecorded">Your vote has been recorded.</span>
+        </p>
+
+        <br>
+
+        <p>
+            <span data-i18n="thankYou">Thank you for participating.</span>
+        </p>
+
+
+        <button
+            class="main-btn"
+            onclick="showPage('results')"
+        >
+            <span data-i18n="viewResults">📊 View Election Results</span>
+        </button>
+
+        <button
+            class="main-btn"
+            onclick="showPage('home')"
+        >
+            <span data-i18n="goHome">🏠 Go to Home</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ADMIN LOGIN -->
+<section id="adminLogin" class="page">
+    <div class="form-box admin-login">
+        <h1 data-i18n="adminLoginTitle">🔐 Admin Login</h1>
+        <p data-i18n="adminLoginDesc">Enter administrator credentials to view voting records.</p>
+        <input type="text" id="adminUser" placeholder="Admin Username" data-placeholder-i18n="adminUsername">
+        <input type="password" id="adminPass" placeholder="Admin Password" data-placeholder-i18n="adminPassword">
+        <button class="main-btn" onclick="adminLogin()" data-i18n="adminLoginBtn">Admin Login</button>
+        <p><small data-i18n="demoCredentials">Demo credentials: admin / admin123</small></p>
+    </div>
+</section>
+
+<!-- ADMIN MODULE -->
+<section id="admin" class="page">
+    <div class="admin-box">
+        <div class="title" style="padding-top:0;">
+            <h1 data-i18n="adminTitle">🛡️ Admin Module</h1>
+            <p data-i18n="adminDesc">Voting audit records for this demo system.</p>
+        </div>
+
+        <div class="admin-actions">
+            <button class="small-btn" onclick="updateAdminTable()" data-i18n="refresh">🔄 Refresh</button>
+            <button class="small-btn danger-btn" onclick="clearVotingRecords()" data-i18n="clearRecords">Clear Voting Records</button>
+            <button class="main-btn" onclick="adminLogout()" data-i18n="adminLogout">Logout</button>
+        </div>
+
+        <br>
+
+        <div id="adminTableContainer"></div>
+    </div>
+</section>
+
+<!-- RESULTS PAGE -->
+
+<section id="results" class="page">
+
+    <div class="title">
+
+        <h1 data-i18n="resultsTitle">📊 Election Results</h1>
+
+        <p>
+            <span data-i18n="currentVotes">Current vote count</span>
+        </p>
+
+    </div>
+
+
+    <div class="results">
+
+
+        <div class="result-card">
+
+            <h2>
+                👨‍💼 Chandra Babu Naidu
+            </h2>
+
+            <div
+                class="vote-number"
+                id="chandraVotes"
+            >
+                0
+            </div>
+
+            <p data-i18n="votes">Votes</p>
+
+        </div>
+
+
+
+        <div class="result-card">
+
+            <h2>
+                👨‍💼 Thalapathi Vijay
+            </h2>
+
+            <div
+                class="vote-number"
+                id="vijayVotes"
+            >
+                0
+            </div>
+
+            <p data-i18n="votes">Votes</p>
+
+        </div>
+
+
+
+        <div class="result-card">
+
+            <h2>
+                👨‍💼 Pawan Kalyan
+            </h2>
+
+            <div
+                class="vote-number"
+                id="PawanVotes"
+            >
+                0
+            </div>
+
+            <p data-i18n="votes">Votes</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="total-box">
+
+        <span data-i18n="totalVotesLabel">Total Votes:</span>
+        <span id="totalVotes">
+            0
+        </span>
+
+    </div>
+
+
+    <div style="text-align:center;">
+
+        <button
+            class="main-btn"
+            onclick="showPage('home')"
+        >
+            <span data-i18n="backHome">🏠 Back to Home</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+
+
+/* LANGUAGE SUPPORT */
+const translations = {
+    en: {
+        logo:"🗳️ VoteSecure", navHome:"Home", navRegister:"Register", navLogin:"Login", navResults:"Results", navAdmin:"Admin",
+        homeTitle:"🗳️ Online Voting System", homeDesc:"A simple, fast and easy digital voting system.",
+        secureTitle:"🔐 Secure", secureDesc:"Voter login is required before voting.", fastTitle:"⚡ Fast", fastDesc:"Votes are recorded instantly.",
+        resultsFeatureTitle:"📊 Results", resultsFeatureDesc:"View the number of votes received by each candidate.",
+        registerNow:"Register Now", loginDesc:"Login to continue voting", registerTitle:"Voter Registration", registerDesc:"Create your voter account",
+        fullName:"Enter Full Name", voterId:"Enter Voter ID", email:"Enter Email", createPassword:"Create Password", password:"Enter Password",
+        registerBtn:"Register", alreadyRegistered:"Already registered?", loginTitle:"Voter Login", newVoter:"New voter?",
+        candidateTitle:"Election Candidates", candidateDesc:"View candidates and continue to vote.", voteBtn:"Vote",
+        castVote:"🗳️ Cast Your Vote", selectCandidate:"Select one candidate", submitVote:"Submit Vote",
+        voteSuccess:"Vote Submitted Successfully!", voteRecorded:"Your vote has been recorded.", thankYou:"Thank you for participating.",
+        viewResults:"📊 View Election Results", goHome:"🏠 Go to Home", resultsTitle:"📊 Election Results", currentVotes:"Current vote count",
+        votes:"Votes", totalVotesLabel:"Total Votes:", backHome:"🏠 Back to Home",
+        adminLoginTitle:"🔐 Admin Login", adminLoginDesc:"Enter administrator credentials to view voting records.",
+        adminUsername:"Admin Username", adminPassword:"Admin Password", adminLoginBtn:"Admin Login",
+        demoCredentials:"Demo credentials: admin / admin123", adminTitle:"🛡️ Admin Module",
+        adminDesc:"Voting audit records for this demo system.", refresh:"🔄 Refresh", clearRecords:"Clear Voting Records",
+        adminLogout:"Logout", voterName:"Voter Name", votedFor:"Voted For", date:"Date", time:"Time", voterIdHeader:"Voter ID",
+        noRecords:"No voting records found.", confirmClear:"Clear all voting records? This cannot be undone.",
+        adminSuccess:"Admin login successful.", adminInvalid:"Invalid admin username or password.",
+        alreadyVoted:"You have already voted.", registrationSuccess:"Registration successful!", fillFields:"Please fill all fields.",
+        invalidLogin:"Invalid Voter ID or Password.", registerFirst:"Please register first.", selectAlert:"Please select a candidate.",
+        voteMessage:"Your vote for", submitted:"has been submitted successfully."
+    },
+    te: {
+        logo:"🗳️ VoteSecure", navHome:"హోమ్", navRegister:"నమోదు", navLogin:"లాగిన్", navResults:"ఫలితాలు", navAdmin:"అడ్మిన్",
+        homeTitle:"🗳️ ఆన్‌లైన్ ఓటింగ్ సిస్టమ్", homeDesc:"సులభమైన, వేగవంతమైన డిజిటల్ ఓటింగ్ వ్యవస్థ.",
+        secureTitle:"🔐 సురక్షితం", secureDesc:"ఓటు వేయడానికి ముందు ఓటరు లాగిన్ అవసరం.", fastTitle:"⚡ వేగవంతం", fastDesc:"ఓట్లు వెంటనే నమోదు అవుతాయి.",
+        resultsFeatureTitle:"📊 ఫలితాలు", resultsFeatureDesc:"ప్రతి అభ్యర్థికి వచ్చిన ఓట్ల సంఖ్యను చూడండి.",
+        registerNow:"ఇప్పుడే నమోదు", loginDesc:"ఓటింగ్ కొనసాగించడానికి లాగిన్ చేయండి", registerTitle:"ఓటరు నమోదు", registerDesc:"మీ ఓటరు ఖాతాను సృష్టించండి",
+        fullName:"పూర్తి పేరు నమోదు చేయండి", voterId:"ఓటర్ ఐడీ నమోదు చేయండి", email:"ఈమెయిల్ నమోదు చేయండి", createPassword:"పాస్‌వర్డ్ సృష్టించండి", password:"పాస్‌వర్డ్ నమోదు చేయండి",
+        registerBtn:"నమోదు", alreadyRegistered:"ఇప్పటికే నమోదు చేశారా?", loginTitle:"ఓటరు లాగిన్", newVoter:"కొత్త ఓటరా?",
+        candidateTitle:"ఎన్నికల అభ్యర్థులు", candidateDesc:"అభ్యర్థులను చూడండి మరియు ఓటు వేయండి.", voteBtn:"ఓటు",
+        castVote:"🗳️ మీ ఓటు వేయండి", selectCandidate:"ఒక అభ్యర్థిని ఎంచుకోండి", submitVote:"ఓటు సమర్పించండి",
+        voteSuccess:"ఓటు విజయవంతంగా సమర్పించబడింది!", voteRecorded:"మీ ఓటు నమోదు చేయబడింది.", thankYou:"పాల్గొన్నందుకు ధన్యవాదాలు.",
+        viewResults:"📊 ఎన్నికల ఫలితాలు చూడండి", goHome:"🏠 హోమ్‌కు వెళ్లండి", resultsTitle:"📊 ఎన్నికల ఫలితాలు", currentVotes:"ప్రస్తుత ఓట్ల సంఖ్య",
+        votes:"ఓట్లు", totalVotesLabel:"మొత్తం ఓట్లు:", backHome:"🏠 హోమ్‌కు తిరిగి",
+        adminLoginTitle:"🔐 అడ్మిన్ లాగిన్", adminLoginDesc:"ఓటింగ్ రికార్డులను చూడటానికి అడ్మిన్ వివరాలను నమోదు చేయండి.",
+        adminUsername:"అడ్మిన్ యూజర్‌నేమ్", adminPassword:"అడ్మిన్ పాస్‌వర్డ్", adminLoginBtn:"అడ్మిన్ లాగిన్",
+        demoCredentials:"డెమో వివరాలు: admin / admin123", adminTitle:"🛡️ అడ్మిన్ మాడ్యూల్",
+        adminDesc:"ఈ డెమో సిస్టమ్‌లోని ఓటింగ్ రికార్డులు.", refresh:"🔄 రిఫ్రెష్", clearRecords:"ఓటింగ్ రికార్డులను తొలగించండి",
+        adminLogout:"లాగ్‌అవుట్", voterName:"ఓటరు పేరు", votedFor:"ఎవరికి ఓటు", date:"తేదీ", time:"సమయం", voterIdHeader:"ఓటర్ ఐడీ",
+        noRecords:"ఓటింగ్ రికార్డులు లేవు.", confirmClear:"అన్ని ఓటింగ్ రికార్డులను తొలగించాలా? దీనిని తిరిగి మార్చలేరు.",
+        adminSuccess:"అడ్మిన్ లాగిన్ విజయవంతమైంది.", adminInvalid:"అడ్మిన్ యూజర్‌నేమ్ లేదా పాస్‌వర్డ్ తప్పు.",
+        alreadyVoted:"మీరు ఇప్పటికే ఓటు వేశారు.", registrationSuccess:"నమోదు విజయవంతమైంది!", fillFields:"అన్ని వివరాలను పూరించండి.",
+        invalidLogin:"ఓటర్ ఐడీ లేదా పాస్‌వర్డ్ తప్పు.", registerFirst:"ముందుగా నమోదు చేసుకోండి.", selectAlert:"దయచేసి ఒక అభ్యర్థిని ఎంచుకోండి.",
+        voteMessage:"మీ ఓటు", submitted:"విజయవంతంగా సమర్పించబడింది."
+    },
+    hi: {
+        logo:"🗳️ VoteSecure", navHome:"होम", navRegister:"पंजीकरण", navLogin:"लॉगिन", navResults:"परिणाम", navAdmin:"एडमिन",
+        homeTitle:"🗳️ ऑनलाइन वोटिंग सिस्टम", homeDesc:"एक सरल, तेज़ और आसान डिजिटल वोटिंग सिस्टम।",
+        secureTitle:"🔐 सुरक्षित", secureDesc:"वोट देने से पहले मतदाता लॉगिन आवश्यक है।", fastTitle:"⚡ तेज़", fastDesc:"वोट तुरंत दर्ज किए जाते हैं।",
+        resultsFeatureTitle:"📊 परिणाम", resultsFeatureDesc:"प्रत्येक उम्मीदवार को मिले वोटों की संख्या देखें।",
+        registerNow:"अभी पंजीकरण करें", loginDesc:"वोटिंग जारी रखने के लिए लॉगिन करें", registerTitle:"मतदाता पंजीकरण", registerDesc:"अपना मतदाता खाता बनाएं",
+        fullName:"पूरा नाम दर्ज करें", voterId:"वोटर आईडी दर्ज करें", email:"ईमेल दर्ज करें", createPassword:"पासवर्ड बनाएं", password:"पासवर्ड दर्ज करें",
+        registerBtn:"पंजीकरण", alreadyRegistered:"पहले से पंजीकृत हैं?", loginTitle:"मतदाता लॉगिन", newVoter:"नए मतदाता?",
+        candidateTitle:"चुनाव उम्मीदवार", candidateDesc:"उम्मीदवार देखें और वोट दें।", voteBtn:"वोट दें",
+        castVote:"🗳️ अपना वोट दें", selectCandidate:"एक उम्मीदवार चुनें", submitVote:"वोट जमा करें",
+        voteSuccess:"वोट सफलतापूर्वक जमा हुआ!", voteRecorded:"आपका वोट दर्ज हो गया है।", thankYou:"भाग लेने के लिए धन्यवाद।",
+        viewResults:"📊 चुनाव परिणाम देखें", goHome:"🏠 होम पर जाएं", resultsTitle:"📊 चुनाव परिणाम", currentVotes:"वर्तमान वोट संख्या",
+        votes:"वोट", totalVotesLabel:"कुल वोट:", backHome:"🏠 होम पर वापस",
+        adminLoginTitle:"🔐 एडमिन लॉगिन", adminLoginDesc:"वोटिंग रिकॉर्ड देखने के लिए एडमिन विवरण दर्ज करें।",
+        adminUsername:"एडमिन यूज़रनेम", adminPassword:"एडमिन पासवर्ड", adminLoginBtn:"एडमिन लॉगिन",
+        demoCredentials:"डेमो विवरण: admin / admin123", adminTitle:"🛡️ एडमिन मॉड्यूल",
+        adminDesc:"इस डेमो सिस्टम के वोटिंग रिकॉर्ड।", refresh:"🔄 रिफ्रेश", clearRecords:"वोटिंग रिकॉर्ड हटाएं",
+        adminLogout:"लॉगआउट", voterName:"मतदाता का नाम", votedFor:"किसे वोट दिया", date:"तारीख", time:"समय", voterIdHeader:"वोटर आईडी",
+        noRecords:"कोई वोटिंग रिकॉर्ड नहीं मिला।", confirmClear:"सभी वोटिंग रिकॉर्ड हटाएं? इसे वापस नहीं किया जा सकता।",
+        adminSuccess:"एडमिन लॉगिन सफल हुआ।", adminInvalid:"एडमिन यूज़रनेम या पासवर्ड गलत है।",
+        alreadyVoted:"आप पहले ही वोट दे चुके हैं।", registrationSuccess:"पंजीकरण सफल हुआ!", fillFields:"कृपया सभी फ़ील्ड भरें।",
+        invalidLogin:"वोटर आईडी या पासवर्ड गलत है।", registerFirst:"कृपया पहले पंजीकरण करें।", selectAlert:"कृपया एक उम्मीदवार चुनें।",
+        voteMessage:"आपका वोट", submitted:"सफलतापूर्वक जमा हो गया है।"
+    }
+};
+
+let currentLanguage = localStorage.getItem("language") || "en";
+
+function changeLanguage(lang){
+    currentLanguage = translations[lang] ? lang : "en";
+    localStorage.setItem("language", currentLanguage);
+
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+        const key = el.getAttribute("data-i18n");
+        if(translations[currentLanguage][key]) el.textContent = translations[currentLanguage][key];
+    });
+
+    document.querySelectorAll("[data-placeholder-i18n]").forEach(function(el){
+        const key = el.getAttribute("data-placeholder-i18n");
+        if(translations[currentLanguage][key]) el.placeholder = translations[currentLanguage][key];
+    });
+
+    document.documentElement.lang = currentLanguage === "te" ? "te" : currentLanguage === "hi" ? "hi" : "en";
+
+    if(document.getElementById("languageSelect")){
+        document.getElementById("languageSelect").value = currentLanguage;
+    }
+
+    if(document.getElementById("admin") && document.getElementById("admin").classList.contains("active")){
+        updateAdminTable();
+    }
+}
+
+function t(key){
+    return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.en[key] || key;
+}
+
+/* ADMIN LOGIN */
+function adminLogin(){
+    const username = document.getElementById("adminUser").value.trim();
+    const password = document.getElementById("adminPass").value;
+
+    if(username === "admin" && password === "admin123"){
+        sessionStorage.setItem("adminLoggedIn","true");
+        alert(t("adminSuccess"));
+        document.getElementById("adminUser").value = "";
+        document.getElementById("adminPass").value = "";
+        updateAdminTable();
+        showPage("admin");
+    }else{
+        alert(t("adminInvalid"));
+    }
+}
+
+function adminLogout(){
+    sessionStorage.removeItem("adminLoggedIn");
+    showPage("home");
+}
+
+function formatDateTime(iso){
+    const d = new Date(iso);
+    return {
+        date: d.toLocaleDateString(currentLanguage === "te" ? "te-IN" : currentLanguage === "hi" ? "hi-IN" : "en-IN"),
+        time: d.toLocaleTimeString(currentLanguage === "te" ? "te-IN" : currentLanguage === "hi" ? "hi-IN" : "en-IN", {
+            hour:"2-digit", minute:"2-digit", second:"2-digit"
+        })
+    };
+}
+
+function updateAdminTable(){
+    if(sessionStorage.getItem("adminLoggedIn") !== "true"){
+        showPage("adminLogin");
+        return;
+    }
+
+    let records = [];
+    try{
+        records = JSON.parse(localStorage.getItem("votingRecords")) || [];
+    }catch(error){
+        records = [];
+    }
+
+    const container = document.getElementById("adminTableContainer");
+
+    if(records.length === 0){
+        container.innerHTML = '<div class="empty-admin">📋 ' + t("noRecords") + '</div>';
+        return;
+    }
+
+    let html = '<table class="admin-table"><thead><tr>' +
+        '<th>#</th><th>' + t("voterIdHeader") + '</th><th>' + t("voterName") + '</th>' +
+        '<th>' + t("votedFor") + '</th><th>' + t("date") + '</th><th>' + t("time") + '</th>' +
+        '</tr></thead><tbody>';
+
+    records.forEach(function(record,index){
+        const dt = formatDateTime(record.votedAt);
+        html += '<tr>' +
+            '<td>' + (index+1) + '</td>' +
+            '<td>' + escapeHtml(record.voterId) + '</td>' +
+            '<td>' + escapeHtml(record.voterName) + '</td>' +
+            '<td>' + escapeHtml(record.candidate) + '</td>' +
+            '<td>' + dt.date + '</td>' +
+            '<td>' + dt.time + '</td>' +
+            '</tr>';
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+}
+
+function escapeHtml(value){
+    return String(value ?? "").replace(/[&<>"']/g, function(ch){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch];
+    });
+}
+
+function clearVotingRecords(){
+    if(confirm(t("confirmClear"))){
+        localStorage.removeItem("votingRecords");
+        updateAdminTable();
+    }
+}
+
+
+/* SHOW PAGE */
+
+function showPage(page){
+
+    if(page === "admin" && sessionStorage.getItem("adminLoggedIn") !== "true"){
+        page = "adminLogin";
+    }
+
+    document
+    .querySelectorAll(".page")
+    .forEach(function(p){
+        p.classList.remove("active");
+    });
+
+    document
+    .getElementById(page)
+    .classList.add("active");
+
+    if(page === "admin"){
+        updateAdminTable();
+    }
+
+    updateResults();
+}
+
+
+
+/* REGISTER */
+
+function register(){
+
+    let name =
+        document.getElementById("name").value;
+
+    let voterId =
+        document.getElementById("voterId").value;
+
+    let email =
+        document.getElementById("email").value;
+
+    let password =
+        document.getElementById("password").value;
+
+
+    if(
+        name === "" ||
+        voterId === "" ||
+        email === "" ||
+        password === ""
+    ){
+
+        alert(t("fillFields"));
+
+        return;
+
+    }
+
+
+    let user = {
+
+        name:name,
+
+        voterId:voterId,
+
+        email:email,
+
+        password:password,
+
+        hasVoted:false
+
+    };
+
+
+    localStorage.setItem(
+        "user",
+        JSON.stringify(user)
+    );
+
+
+    alert(
+        "Registration successful!"
+    );
+
+
+    showPage("login");
+
+}
+
+
+
+/* LOGIN */
+
+function login(){
+
+    let id =
+        document.getElementById("loginId").value;
+
+    let pass =
+        document.getElementById("loginPass").value;
+
+
+    let user =
+        JSON.parse(
+            localStorage.getItem("user")
+        );
+
+
+    if(!user){
+
+        alert(
+            "Please register first."
+        );
+
+        showPage("register");
+
+        return;
+
+    }
+
+
+    if(
+        id === user.voterId &&
+        pass === user.password
+    ){
+
+        if(user.hasVoted){
+
+            alert(
+                "You have already voted."
+            );
+
+            showPage("results");
+
+            return;
+
+        }
+
+
+        alert(
+            "Login successful!"
+        );
+
+        showPage("candidates");
+
+    }
+
+    else{
+
+        alert(
+            "Invalid Voter ID or Password."
+        );
+
+    }
+
+}
+
+
+
+/* SUBMIT VOTE */
+
+function submitVote(){
+
+    let selected =
+        document.querySelector(
+            'input[name="candidate"]:checked'
+        );
+
+
+    if(!selected){
+
+        alert(
+            "Please select a candidate."
+        );
+
+        return;
+
+    }
+
+
+    let candidate =
+        selected.value;
+
+
+    // Get existing votes safely
+    let savedVotes = localStorage.getItem("votes");
+    let votes = {};
+
+    try{
+        votes = savedVotes ? JSON.parse(savedVotes) : {};
+    }
+    catch(error){
+        votes = {};
+    }
+
+    // Make sure all candidates have numeric vote counts
+    votes["Chandra Babu Naidu"] =
+        Number(votes["Chandra Babu Naidu"]) || 0;
+
+    votes["Thalapathi Vijay"] =
+        Number(votes["Thalapathi Vijay"]) || 0;
+
+    votes["Pawan Kalyan"] =
+        Number(votes["Pawan Kalyan"]) || 0;
+
+    /* ADD ONE VOTE */
+
+    votes[candidate]++;
+
+
+    localStorage.setItem(
+        "votes",
+        JSON.stringify(votes)
+    );
+
+
+    /* CREATE ADMIN VOTING RECORD */
+    let user =
+        JSON.parse(
+            localStorage.getItem("user")
+        );
+
+    if(user){
+        let votingRecords = [];
+        try{
+            votingRecords = JSON.parse(localStorage.getItem("votingRecords")) || [];
+        }catch(error){
+            votingRecords = [];
+        }
+
+        votingRecords.push({
+            voterId: user.voterId,
+            voterName: user.name,
+            candidate: candidate,
+            votedAt: new Date().toISOString()
+        });
+
+        localStorage.setItem("votingRecords", JSON.stringify(votingRecords));
+    }
+
+    /* MARK USER AS VOTED */
+
+
+    if(user){
+
+        user.hasVoted = true;
+
+        localStorage.setItem(
+            "user",
+            JSON.stringify(user)
+        );
+
+    }
+
+
+    /* SHOW SUCCESS MESSAGE */
+
+    document.getElementById(
+        "selectedCandidate"
+    ).innerHTML =
+
+    "Your vote for <b>" +
+    candidate +
+    "</b> has been submitted successfully.";
+
+
+    /* CLEAR RADIO BUTTON */
+
+    selected.checked = false;
+
+
+    /* UPDATE RESULTS */
+
+    updateResults();
+
+
+    /* OPEN SUCCESS PAGE */
+
+    showPage("success");
+
+}
+
+
+
+/* UPDATE RESULTS */
+
+function updateResults(){
+
+    // Get saved votes
+    let savedVotes = localStorage.getItem("votes");
+    let votes = {};
+
+    try{
+        votes = savedVotes ? JSON.parse(savedVotes) : {};
+    }
+    catch(error){
+        votes = {};
+    }
+
+    // Make sure every candidate always has a number.
+    // If a value is undefined, null, NaN or invalid, show 0.
+    votes["Chandra Babu Naidu"] =
+        Number(votes["Chandra Babu Naidu"]) || 0;
+
+    votes["Thalapathi Vijay"] =
+        Number(votes["Thalapathi Vijay"]) || 0;
+
+    votes["Pawan Kalyan"] =
+        Number(votes["Pawan Kalyan"]) || 0;
+
+    // Save the cleaned vote data
+    localStorage.setItem("votes", JSON.stringify(votes));
+
+    // Display each candidate's votes
+    document.getElementById("chandraVotes").innerText =
+        votes["Chandra Babu Naidu"];
+
+    document.getElementById("vijayVotes").innerText =
+        votes["Thalapathi Vijay"];
+
+    document.getElementById("PawanVotes").innerText =
+        votes["Pawan Kalyan"];
+
+    // Total number of votes = number of people who voted
+    // because each voter is allowed to vote only once.
+    let total =
+        votes["Chandra Babu Naidu"] +
+        votes["Thalapathi Vijay"] +
+        votes["Pawan Kalyan"];
+
+    document.getElementById("totalVotes").innerText = total;
+}
+
+
+/* LOAD LANGUAGE AND RESULTS */
+document.getElementById("languageSelect").value = currentLanguage;
+changeLanguage(currentLanguage);
+updateResults();
+
+</script>
+
+</body>
+</html>
